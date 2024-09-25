@@ -8,7 +8,7 @@ import net.minecraftforge.fml.common.Mod;
 import squeek.appleskin.api.event.FoodValuesEvent;
 import squeek.appleskin.api.food.FoodValues;
 
-@Mod.EventBusSubscriber(value = Dist.CLIENT)
+
 public class AppleSkinEventHandler {
     // AppleSkinのFoodValuesEventを使って、ツールチップにカスタムの回復量を表示
     @SubscribeEvent()

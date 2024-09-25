@@ -54,8 +54,10 @@ public class Foodvariation {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
 
         // Register the commonSetup method for modloading
-        modEventBus.addListener(this::clientInit);
+        LOGGER.info("LOG1");
+        modEventBus.addListener(this::appleSkinInit);
         modEventBus.addListener(this::setup);
+        LOGGER.info("LOG2");
 
         // Register the Deferred Register to the mod event bus so blocks get registered
         //BLOCKS.register(modEventBus);
@@ -92,8 +94,11 @@ public class Foodvariation {
         Config.items.forEach((item) -> LOGGER.info("ITEM >> {}", item.toString()));
     }
 
-    private void clientInit(final FMLClientSetupEvent event) {
+    private void appleSkinInit(final FMLClientSetupEvent event) {
+        LOGGER.info("AppleSkin check");
         if (ModList.get().isLoaded("appleskin")) {
+            //デバック用ログ
+            LOGGER.info("AppleSkin is loaded");
             MinecraftForge.EVENT_BUS.register(new AppleSkinEventHandler());
         }
     }
