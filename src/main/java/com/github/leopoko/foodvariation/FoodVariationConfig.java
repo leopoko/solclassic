@@ -48,7 +48,7 @@ public class FoodVariationConfig {
             // 減衰係数のリスト
             foodDecayModifiers = builder
                     .comment("List of decay modifiers for food recovery, applied sequentially")
-                    .defineList("foodDecayModifiers", Arrays.asList(1.0, 0.75, 0.50, 0.25, 0.05), o -> o instanceof Double);
+                    .defineList("foodDecayModifiers", Arrays.asList(1.0, 0.90, 0.75, 0.50, 0.05), o -> o instanceof Double);
 
             builder.pop();
         }
