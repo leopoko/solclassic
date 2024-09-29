@@ -83,6 +83,11 @@ public class FoodEventHandler {
         playerFoodHistory.put(player.getUUID(), foodHistory);
     }
 
+    // プレイヤーの食事履歴をリセットする（サーバー側）
+    public static void resetFoodHistory(ServerPlayer player) {
+        setFoodHistory(player, new LinkedList<>());
+    }
+
     // 同じ食べ物を何回食べたかを取得
     public static int getTimesEatenLong(Player player, ItemStack stack) {
         LinkedList<ItemStack> foodHistory = getFoodHistory(player);

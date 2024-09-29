@@ -26,7 +26,7 @@ public class FoodVariationConfig {
 
         public final ForgeConfigSpec.DoubleValue ShortfoodDecayModifiers;
 
-        // 減衰係数（デフォルト: [1.0, 0.75, 0.50, 0.25, 0.05]）
+        // 減衰係数（デフォルト: [1.0, 0.90, 0.75, 0.50, 0.05]）
         public final ForgeConfigSpec.ConfigValue<List<? extends Double>> foodDecayModifiers;
 
         public ServerConfig(ForgeConfigSpec.Builder builder) {

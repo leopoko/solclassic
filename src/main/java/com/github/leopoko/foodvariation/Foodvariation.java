@@ -72,6 +72,7 @@ public class Foodvariation {
         MinecraftForge.EVENT_BUS.register(new PlayerDataHandler());
         MinecraftForge.EVENT_BUS.register(new FoodHistoryManager());
         MinecraftForge.EVENT_BUS.register(new TooltipEventHandler());
+        MinecraftForge.EVENT_BUS.register(new FoodVariationCommands());
 
 
         // Register the item to a creative tab
