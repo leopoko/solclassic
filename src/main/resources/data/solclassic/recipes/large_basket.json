@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "###",
+    "HBH",
+    "HHH"
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:wheat"
+    },
+    "H": {
+      "item": "minecraft:hay_block"
+    },
+    "B": {
+      "item": "minecraft:bowl"
+    }
+  },
+  "result": {
+    "item": "solclassic:large_basket",
+    "count": 1
+  }
+}

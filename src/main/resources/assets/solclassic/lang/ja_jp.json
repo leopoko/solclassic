@@ -1,3 +1,7 @@
 {
-  "tooltip.food_reduction": "満腹度回復が %s%% 減少しています"
+  "tooltip.food_reduction": "満腹度回復が %s%% 減少しています",
+  "item.solclassic.basket": "バスケット",
+    "container.basket": "バスケット",
+  "item.solclassic.large_basket": "大きなバスケット",
+  "container.large_basket": "大きなバスケット"
 }

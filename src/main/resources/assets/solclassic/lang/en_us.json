@@ -1,3 +1,7 @@
 {
-  "tooltip.food_reduction": "Hunger recovery reduced by %s%%"
+  "tooltip.food_reduction": "Hunger recovery reduced by %s%%",
+  "item.solclassic.basket": "Basket",
+  "container.basket": "Basket",
+  "item.solclassic.large_basket": "Large Basket",
+  "container.large_basket": "Large Basket"
 }
