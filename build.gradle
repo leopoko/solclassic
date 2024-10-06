@@ -167,8 +167,10 @@ dependencies {
     compileOnly(fg.deobf("mezz.jei:jei-1.20.1-common-api:15.20.0.102"))
     compileOnly(fg.deobf("mezz.jei:jei-1.20.1-forge-api:15.20.0.102"))
     compileOnly fg.deobf("squeek.appleskin:appleskin-forge:mc1.20.1-2.5.1:api")
-    //implementation fg.deobf("curse.maven:farmers-delight-398521:4638874")
+
+    runtimeOnly fg.deobf("curse.maven:farmers-delight-398521:4638874")
     runtimeOnly(fg.deobf("mezz.jei:jei-1.20.1-forge:15.20.0.102"))
+    runtimeOnly fg.deobf("squeek.appleskin:appleskin-forge:mc1.20.1-2.5.1")
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     //test

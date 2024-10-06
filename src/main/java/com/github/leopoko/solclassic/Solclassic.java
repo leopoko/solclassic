@@ -1,5 +1,7 @@
 package com.github.leopoko.solclassic;
 
+import com.github.leopoko.solclassic.command.FoodHistoryCommand;
+import com.github.leopoko.solclassic.command.SolClassicDeleteCommand;
 import com.github.leopoko.solclassic.sync.NetworkHandler;
 import com.mojang.logging.LogUtils;
 import net.minecraft.client.Minecraft;
@@ -46,7 +48,8 @@ public class Solclassic {
         MinecraftForge.EVENT_BUS.register(new PlayerDataHandler());
         MinecraftForge.EVENT_BUS.register(new FoodHistoryManager());
         MinecraftForge.EVENT_BUS.register(new TooltipEventHandler());
-        MinecraftForge.EVENT_BUS.register(new SolClassicCommands());
+        MinecraftForge.EVENT_BUS.register(new SolClassicDeleteCommand());
+        MinecraftForge.EVENT_BUS.register(new FoodHistoryCommand());
 
         // Register our mod's ForgeConfigSpec so that Forge can create and load the config file for us
         ModLoadingContext.get().registerConfig(ModConfig.Type.SERVER, SolClassicConfig.SERVER_CONFIG);
@@ -90,6 +93,7 @@ public class Solclassic {
             if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
                 event.accept(ModItems.BASKET.get());
                 event.accept(ModItems.LARGEBASKET.get());
+                event.accept(ModItems.WICKERBASKET.get());
             }
         }
     }

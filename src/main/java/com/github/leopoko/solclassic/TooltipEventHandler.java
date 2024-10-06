@@ -2,12 +2,14 @@ package com.github.leopoko.solclassic;
 
 import net.minecraft.network.chat.Component;
 import net.minecraft.network.chat.MutableComponent;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.event.entity.player.ItemTooltipEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.registries.ForgeRegistries;
 
 @Mod.EventBusSubscriber(value = Dist.CLIENT)
 public class TooltipEventHandler {
@@ -23,9 +25,10 @@ public class TooltipEventHandler {
         }
 
         ItemStack itemStack = event.getItemStack();
+        ResourceLocation itemId = ForgeRegistries.ITEMS.getKey(itemStack.getItem());
 
         // アイテムが食べ物であるか確認
-        if (itemStack.isEdible()) {
+        if (itemStack.isEdible() && !itemId.toString().equals("solclassic:wicker_basket")) {
             // 食べた回数に基づいて減少率を計算
             int timesEaten = FoodEventHandler.getTimesEatenLong(player, itemStack);
             int timesEatenShort = FoodEventHandler.getTimesEatenShort(player, itemStack);

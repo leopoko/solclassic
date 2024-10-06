@@ -3,32 +3,18 @@ package com.github.leopoko.solclassic.item;
 import com.github.leopoko.solclassic.container.FoodOnlyChestMenu;
 import com.github.leopoko.solclassic.container.FoodOnlyContainer;
 import com.github.leopoko.solclassic.container.FoodOnlyItemStackHandler;
-import net.minecraft.core.BlockPos;
-import net.minecraft.core.Direction;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.*;
-import net.minecraft.world.Container;
-import net.minecraft.world.entity.Entity;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.*;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
-import net.minecraftforge.common.capabilities.Capability;
-import net.minecraftforge.common.capabilities.ForgeCapabilities;
 import net.minecraft.network.chat.Component;
-import net.minecraftforge.common.capabilities.ICapabilityProvider;
-import net.minecraftforge.common.util.LazyOptional;
-import net.minecraftforge.items.IItemHandler;
 import net.minecraftforge.items.ItemStackHandler;
-import net.minecraftforge.items.wrapper.InvWrapper;
 import net.minecraftforge.network.NetworkHooks;
-import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
-import java.awt.*;
 import java.util.logging.Logger;
 
 public class LunchbagItem extends Item {
@@ -62,7 +48,7 @@ public class LunchbagItem extends Item {
              */
 
             MenuProvider containerProvider = new SimpleMenuProvider(
-                    (id, playerInventory, playerEntity) -> new FoodOnlyChestMenu(MenuType.GENERIC_9x1, id, playerInventory, container, 1, slotIndex){
+                    (id, playerInventory, playerEntity) -> new FoodOnlyChestMenu(MenuType.GENERIC_9x1, id, playerInventory, container, 1, slotIndex) {
                         @Override
                         public void removed(Player player) {
                             super.removed(player);
@@ -77,7 +63,6 @@ public class LunchbagItem extends Item {
 
             NetworkHooks.openScreen(serverPlayer, containerProvider);
         }
-
         return InteractionResultHolder.sidedSuccess(player.getItemInHand(hand), level.isClientSide());
     }
 

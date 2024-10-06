@@ -1,12 +1,16 @@
 package com.github.leopoko.solclassic;
 
+import com.github.leopoko.solclassic.item.WickerBasketItem;
+import com.mojang.datafixers.util.Pair;
 import net.minecraft.network.chat.Component;
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.food.FoodProperties;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.loading.FMLEnvironment;
+import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.*;
 
@@ -22,22 +26,44 @@ public class FoodEventHandler {
     }
 
     // カスタムの食事処理を行う
-    public static void modifyFoodData(ServerPlayer player, ItemStack stack) {
+    public static Pair<ItemStack,Integer> modifyFoodData(ServerPlayer player, ItemStack stack) {
         UUID playerUUID = player.getUUID();
+        ResourceLocation itemId = ForgeRegistries.ITEMS.getKey(stack.getItem());
+        WickerBasketItem wicekrBasket = null;
+        ItemStack originalStack = stack.copy();
+        int slotIndex = -1;
 
         // プレイヤーの履歴を取得（存在しない場合は新たに作成）
         LinkedList<ItemStack> foodHistory = playerFoodHistory.getOrDefault(playerUUID, new LinkedList<>());
+
+        FoodProperties food = stack.getItem().getFoodProperties(stack, player);
+
+        if (itemId.toString().equals("solclassic:wicker_basket")) {
+            wicekrBasket = (WickerBasketItem) stack.getItem();
+            var foodData = wicekrBasket.getMostNutritiousFood(stack, player);
+            if (foodData == null) {
+                return Pair.of(stack, slotIndex);
+            }
+            slotIndex = wicekrBasket.getMostNutritiousFood(stack, player).getSecond();
+            stack = wicekrBasket.getMostNutritiousFood(stack, player).getFirst();
+            // ボウルを返す処理
+            if (stack.getItem().getCraftingRemainingItem(stack) != null) {
+                ItemStack containerItem = stack.getItem().getCraftingRemainingItem(stack);
+                if (!player.getInventory().add(containerItem)) {
+                    player.drop(containerItem, false); // インベントリに入らない場合、地面にドロップ
+                }
+            }
+        }
 
         // 食べた回数を数える
         long sameFoodCount = getTimesEatenLong(player, stack);
         int sameFoodCountShort = getTimesEatenShort(player, stack);
 
-        FoodProperties food = stack.getItem().getFoodProperties(stack, player);
         if (food != null) {
             // 回数に応じた回復度を計算
-            float modifier = calculateModifier((int) sameFoodCount, sameFoodCountShort);
-            int customFoodLevel = Math.max(1, (int) (food.getNutrition() * modifier));
-            float customSaturationLevel = Math.max(0.1f, food.getSaturationModifier() * modifier);
+            var FoodData = getFoodData(stack, player);
+            int customFoodLevel = FoodData.getFirst();
+            float customSaturationLevel = FoodData.getSecond();
 
             // プレイヤーの満腹度を更新
             player.getFoodData().eat(customFoodLevel, customSaturationLevel);
@@ -54,7 +80,11 @@ public class FoodEventHandler {
 
             // 食べ物履歴に追加 (10個まで)
             addFoodToHistory(playerUUID, foodHistory, stack);
+            if (wicekrBasket != null) {
+                wicekrBasket.consumeItemFromSlot(originalStack, slotIndex);
+            }
         }
+        return Pair.of(stack, slotIndex);
     }
 
     // デバッグモードかどうかを判定するメソッド
@@ -123,5 +153,39 @@ public class FoodEventHandler {
         modifier = Math.max(0.0f, modifier);
 
         return modifier;
+    }
+
+    // stackとplayerを引数に取り、その食べ物の回復度（Food, Saturation）を返す
+    public static Pair<Integer, Float> getFoodData(ItemStack stack, Player player) {
+        ResourceLocation itemId = ForgeRegistries.ITEMS.getKey(stack.getItem());
+        // stackがwicker_basketの場合は、回復度をそのまま返す
+        if (itemId.toString().equals("solclassic:wicker_basket")) {
+            WickerBasketItem item = (WickerBasketItem) stack.getItem();
+            var foodData = item.getMostNutritiousFood(stack, player);
+            if (foodData == null) {
+                return Pair.of(0, 0.0f);
+            }
+            stack = item.getMostNutritiousFood(stack, player).getFirst();
+        }
+
+        FoodProperties food = stack.getItem().getFoodProperties(stack, player);
+
+        long sameFoodCount = getTimesEatenLong(player, stack);
+        int sameFoodCountShort = getTimesEatenShort(player, stack);
+        if (food != null) {
+            float modifier = calculateModifier((int) sameFoodCount, sameFoodCountShort);
+            int customFoodLevel = Math.max(1, (int) (food.getNutrition() * modifier));
+            float customSaturationLevel = Math.max(0.1f, food.getSaturationModifier() * modifier);
+            return Pair.of(customFoodLevel, customSaturationLevel);
+        }
+        return Pair.of(0, 0.0f);
+    }
+
+    public static List<ItemStack> getFoodHistoryForPlayer(ServerPlayer player) {
+        LinkedList<ItemStack> history = playerFoodHistory.get(player.getUUID());
+        if (history == null) {
+            return List.of(); // 空のリストを返す
+        }
+        return new LinkedList<>(history); // 履歴をコピーして返す
     }
 }

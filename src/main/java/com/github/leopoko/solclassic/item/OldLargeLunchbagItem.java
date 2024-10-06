@@ -7,11 +7,8 @@ import net.minecraft.nbt.CompoundTag;
 import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraft.world.*;
-import net.minecraft.world.entity.player.Inventory;
 import net.minecraft.world.entity.player.Player;
-import net.minecraft.world.inventory.ChestMenu;
 import net.minecraft.world.inventory.MenuType;
-import net.minecraft.world.inventory.Slot;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
@@ -20,14 +17,14 @@ import net.minecraftforge.network.NetworkHooks;
 
 import java.util.logging.Logger;
 
-public class LargeLunchbagItem extends Item {
+public class OldLargeLunchbagItem extends Item {
 
-    static Logger LOGGER = Logger.getLogger(LargeLunchbagItem.class.getName());
+    static Logger LOGGER = Logger.getLogger(OldLargeLunchbagItem.class.getName());
 
     private static final String INVENTORY_TAG = "large_basket_inventory";
     public static final int SLOT_COUNT = 27;
 
-    public LargeLunchbagItem(Properties properties) {
+    public OldLargeLunchbagItem(Properties properties) {
         super(properties);
     }
 

@@ -6,6 +6,8 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import squeek.appleskin.api.event.FoodValuesEvent;
 import squeek.appleskin.api.food.FoodValues;
 
+import static com.github.leopoko.solclassic.FoodEventHandler.getFoodData;
+
 
 public class AppleSkinEventHandler {
     // AppleSkinのFoodValuesEventを使って、ツールチップにカスタムの回復量を表示
@@ -28,16 +30,12 @@ public class AppleSkinEventHandler {
         int nutrition = stack.getItem().getFoodProperties().getNutrition();
         float saturation = stack.getItem().getFoodProperties().getSaturationModifier();
 
-        // 同じ食べ物を何回食べたかによって回復量を減少させるロジックを追加
-        int timesEaten = FoodEventHandler.getTimesEatenLong(player, stack);
-        int timesEatenShort = FoodEventHandler.getTimesEatenShort(player, stack);
-
-        // カスタムの回復量を調整 (timesEatenに基づく回復度の減少)
-        float modifier = FoodEventHandler.calculateModifier(timesEaten, timesEatenShort);
-        int customNutrition = Math.max(1, (int) (nutrition * modifier));
-        float customSaturation = Math.max(0.1f, saturation * modifier);
+        // 回数に応じた回復度を計算
+        var FoodData = getFoodData(stack, player);
+        int customFoodLevel = FoodData.getFirst();
+        float customSaturationLevel = FoodData.getSecond();
 
         // カスタムの回復量を新しいFoodValuesとして返す
-        return new FoodValues(customNutrition, customSaturation);
+        return new FoodValues(customFoodLevel, customSaturationLevel);
     }
 }

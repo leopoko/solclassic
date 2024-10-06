@@ -1,5 +1,6 @@
-package com.github.leopoko.solclassic;
+package com.github.leopoko.solclassic.command;
 
+import com.github.leopoko.solclassic.FoodEventHandler;
 import com.github.leopoko.solclassic.sync.NetworkHandler;
 import com.github.leopoko.solclassic.sync.SyncFoodHistoryPacket;
 import com.mojang.brigadier.context.CommandContext;
@@ -20,7 +21,7 @@ import java.util.LinkedList;
 
 
 @Mod.EventBusSubscriber
-public class SolClassicCommands {
+public class SolClassicDeleteCommand {
 
     // コマンドの登録
     @SubscribeEvent
@@ -28,7 +29,7 @@ public class SolClassicCommands {
         event.getDispatcher().register(Commands.literal("resetfoodhistory")
                 .requires(source -> source.hasPermission(2)) // OP権限が必要
                 .then(Commands.argument("targets", EntityArgument.players())
-                        .executes(SolClassicCommands::executeResetFoodHistory)));
+                        .executes(SolClassicDeleteCommand::executeResetFoodHistory)));
     }
 
     // コマンドの実行処理

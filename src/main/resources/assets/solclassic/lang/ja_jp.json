@@ -2,6 +2,9 @@
   "tooltip.food_reduction": "満腹度回復が %s%% 減少しています",
   "item.solclassic.basket": "バスケット",
     "container.basket": "バスケット",
-  "item.solclassic.large_basket": "大きなバスケット",
-  "container.large_basket": "大きなバスケット"
+  "item.solclassic.large_basket": "大きなバスケット(old)",
+  "container.large_basket": "大きなバスケット(old)",
+  "item.solclassic.wicker_basket": "編みかご",
+  "container.wicker_basket": "編みかご",
+  "tooltip.wicker_basket.description": "右クリックで最も回復量が高い食べ物を食べる。\nShift + 右クリックで開く。"
 }

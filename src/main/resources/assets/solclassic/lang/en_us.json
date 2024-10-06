@@ -2,6 +2,9 @@
   "tooltip.food_reduction": "Hunger recovery reduced by %s%%",
   "item.solclassic.basket": "Basket",
   "container.basket": "Basket",
-  "item.solclassic.large_basket": "Large Basket",
-  "container.large_basket": "Large Basket"
+  "item.solclassic.large_basket": "Large Basket(old)",
+  "container.large_basket": "Large Basket(old)",
+  "item.solclassic.wicker_basket": "Wicker Basket",
+  "container.wicker_basket": "Wicker Basket",
+  "tooltip.wicker_basket.description": "Right-click to eat the best food\nShift + Right-click to open."
 }
