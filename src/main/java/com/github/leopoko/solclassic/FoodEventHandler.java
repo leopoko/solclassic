@@ -175,7 +175,7 @@ public class FoodEventHandler {
         if (food != null) {
             float modifier = calculateModifier((int) sameFoodCount, sameFoodCountShort);
             int customFoodLevel = Math.max(1, (int) (food.getNutrition() * modifier));
-            float customSaturationLevel = Math.max(0.1f, food.getSaturationModifier() * modifier);
+            float customSaturationLevel = Math.max(0.01f, food.getSaturationModifier());
             return Pair.of(customFoodLevel, customSaturationLevel);
         }
         return Pair.of(0, 0.0f);

@@ -92,7 +92,6 @@ public class Solclassic {
             // Lunchbagを特定のクリエイティブタブに追加
             if (event.getTabKey() == CreativeModeTabs.TOOLS_AND_UTILITIES) {
                 event.accept(ModItems.BASKET.get());
-                event.accept(ModItems.LARGEBASKET.get());
                 event.accept(ModItems.WICKERBASKET.get());
             }
         }
