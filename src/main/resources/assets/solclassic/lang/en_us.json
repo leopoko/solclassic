@@ -6,5 +6,6 @@
   "container.large_basket": "Large Basket(old)",
   "item.solclassic.wicker_basket": "Wicker Basket",
   "container.wicker_basket": "Wicker Basket",
-  "tooltip.wicker_basket.description": "Right-click to eat the best food\nShift + Right-click to open."
+  "tooltip.wicker_basket.description1": "Right-click to eat the best food",
+  "tooltip.wicker_basket.description2": "Shift + Right-click to open."
 }

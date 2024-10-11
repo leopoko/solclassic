@@ -171,6 +171,7 @@ dependencies {
     runtimeOnly fg.deobf("curse.maven:farmers-delight-398521:4638874")
     runtimeOnly(fg.deobf("mezz.jei:jei-1.20.1-forge:15.20.0.102"))
     runtimeOnly fg.deobf("squeek.appleskin:appleskin-forge:mc1.20.1-2.5.1")
+    //implementation fg.deobf("curse.maven:diet-443570:4813904")
 
     annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
     //test

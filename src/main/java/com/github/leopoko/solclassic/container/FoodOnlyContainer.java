@@ -1,11 +1,14 @@
 package com.github.leopoko.solclassic.container;
 
 
+import net.minecraft.resources.ResourceLocation;
 import net.minecraft.world.SimpleContainer;
 import net.minecraft.world.item.ItemStack;
+import net.minecraftforge.registries.ForgeRegistries;
 
 public class FoodOnlyContainer extends SimpleContainer {
     private final FoodOnlyItemStackHandler handler;
+    private int size;
 
     public FoodOnlyContainer(FoodOnlyItemStackHandler handler) {
         super(handler.getSlots());
@@ -17,6 +20,7 @@ public class FoodOnlyContainer extends SimpleContainer {
         }
     }
 
+
     @Override
     public boolean canPlaceItem(int slot, ItemStack stack) {
         // FoodOnlyItemStackHandlerの制限を使用
@@ -25,8 +29,9 @@ public class FoodOnlyContainer extends SimpleContainer {
 
     @Override
     public void setItem(int index, ItemStack stack) {
+        ResourceLocation itemId = ForgeRegistries.ITEMS.getKey(stack.getItem());
         // 適していないアイテムの場合は何もせず終了
-        if (!handler.isItemValid(index, stack)) {
+        if (!handler.isItemValid(index, stack) && !stack.isEmpty()) {
             return;
         }
 
@@ -34,4 +39,6 @@ public class FoodOnlyContainer extends SimpleContainer {
         super.setItem(index, stack);
         handler.setStackInSlot(index, stack); // ItemStackHandlerにも反映
     }
+
+
 }

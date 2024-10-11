@@ -6,5 +6,6 @@
   "container.large_basket": "大きなバスケット(old)",
   "item.solclassic.wicker_basket": "編みかご",
   "container.wicker_basket": "編みかご",
-  "tooltip.wicker_basket.description": "右クリックで最も回復量が高い食べ物を食べる。\nShift + 右クリックで開く。"
+  "tooltip.wicker_basket.description1": "右クリックで最も回復量が高い食べ物を食べる。",
+  "tooltip.wicker_basket.description2": "Shift + 右クリックで開く。"
 }

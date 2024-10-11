@@ -45,7 +45,8 @@ public class WickerBasketItem extends Item {
 
     @Override
     public void appendHoverText(ItemStack stack, @Nullable Level level, List<Component> tooltip, TooltipFlag flag) {
-        tooltip.add(Component.translatable("tooltip.wicker_basket.description"));
+        tooltip.add(Component.translatable("tooltip.wicker_basket.description1"));
+        tooltip.add(Component.translatable("tooltip.wicker_basket.description2"));
     }
 
 
