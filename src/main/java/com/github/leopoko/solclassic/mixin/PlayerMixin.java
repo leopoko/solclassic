@@ -1,7 +1,10 @@
 package com.github.leopoko.solclassic.mixin;
 
 import com.github.leopoko.solclassic.FoodEventHandler;
+import com.github.leopoko.solclassic.compat.DietHelper;
 import com.github.leopoko.solclassic.item.WickerBasketItem;
+import com.illusivesoulworks.diet.api.type.IDietResult;
+import com.illusivesoulworks.diet.api.type.IDietSuite;
 import com.mojang.datafixers.util.Pair;
 import com.sun.jna.platform.win32.BaseTSD;
 import net.minecraft.advancements.CriteriaTriggers;
@@ -45,6 +48,8 @@ public abstract class PlayerMixin {
         if ((Player) (Object) this instanceof ServerPlayer serverPlayer) {
             // サーバープレイヤーが食べ物を食べたときにカスタム処理を行う
             if (FoodEventHandler.shouldModifyFood(stack)) {
+                IDietResult suite = DietHelper.getPlayerNutrition(serverPlayer, stack);
+                LOGGER.info("Nutrition: " + suite);
                 ItemStack originalStack = stack.copy();
                 int slotindex = -1;
                 boolean isWickerBasket = itemId.toString().equals("solclassic:wicker_basket");

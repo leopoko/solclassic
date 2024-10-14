@@ -5,11 +5,13 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "solclassic.refmap.json",
   "mixins": [
-    "PlayerMixin"
+    "PlayerMixin",
+    "DietMixin"
   ],
   "client": [
   ],
   "injectors": {
     "defaultRequire": 1
   }
+
 }

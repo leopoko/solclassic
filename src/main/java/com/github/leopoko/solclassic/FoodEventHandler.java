@@ -38,14 +38,15 @@ public class FoodEventHandler {
 
         FoodProperties food = stack.getItem().getFoodProperties(stack, player);
 
+        // wicker_basketの場合は、中身の食べ物を取り出す
         if (itemId.toString().equals("solclassic:wicker_basket")) {
             wicekrBasket = (WickerBasketItem) stack.getItem();
             var foodData = wicekrBasket.getMostNutritiousFood(stack, player);
             if (foodData == null) {
                 return Pair.of(stack, slotIndex);
             }
-            slotIndex = wicekrBasket.getMostNutritiousFood(stack, player).getSecond();
-            stack = wicekrBasket.getMostNutritiousFood(stack, player).getFirst();
+            slotIndex = foodData.getSecond();
+            stack = foodData.getFirst();
             // ボウルを返す処理
             if (stack.getItem().getCraftingRemainingItem(stack) != null) {
                 ItemStack containerItem = stack.getItem().getCraftingRemainingItem(stack);

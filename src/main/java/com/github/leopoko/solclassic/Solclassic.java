@@ -38,6 +38,7 @@ public class Solclassic {
     public Solclassic() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
         modEventBus.addListener(this::appleSkinInit);
+        modEventBus.addListener(this::dietInit);
         modEventBus.addListener(this::setup);
 
         ModItems.ITEMS.register(modEventBus);
@@ -61,6 +62,14 @@ public class Solclassic {
             //デバック用ログ
             LOGGER.info("AppleSkin is loaded");
             MinecraftForge.EVENT_BUS.register(new AppleSkinEventHandler());
+        }
+    }
+
+    private void dietInit(final FMLClientSetupEvent event) {
+        LOGGER.info("diet check");
+        if (ModList.get().isLoaded("diet")) {
+            //デバック用ログ
+            LOGGER.info("diet is loaded");
         }
     }
 
